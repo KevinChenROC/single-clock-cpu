@@ -19,14 +19,14 @@ module sign_extend(immediate_in, sign_extend );
 endmodule
 
 // test bench
-module test();
-  reg [13:0] immediate_in;
-  wire [15:0] sign_extend;
-
-  sign_extend sext(immediate_in, sign_extend);
-  initial begin
-    $monitor("immediate_in = %b, sign_extend = %b", immediate_in, sign_extend);
-    immediate_in = {2'b00, {12{1'b1}}};
-    #10 immediate_in = {2'b11, {12{1'b1}}};
-  end
-endmodule
+// module test();
+//   reg [13:0] immediate_in;
+//   wire [15:0] sign_extend;
+//
+//   sign_extend sext(immediate_in, sign_extend);
+//   initial begin
+//     $monitor("immediate_in = %b, sign_extend = %b", immediate_in, sign_extend);
+//     immediate_in = {2'b00, {12{1'b1}}};
+//     #10 immediate_in = {2'b11, {12{1'b1}}};
+//   end
+// endmodule

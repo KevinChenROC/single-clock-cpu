@@ -17,20 +17,20 @@ module MUX_2_to_1(data0_i,data1_i,select_i,data_o);
 
 endmodule
 
-module test();
-  localparam  size = 2;
-  reg  [size:0] data0_i;
-  reg  [size:0] data1_i;
-  reg             select_i;
-  wire [size:0] data_o;
-
-  MUX_2_to_1 #(3) m21(data0_i, data1_i, select_i, data_o);
-
-  initial begin
-    $monitor("data0_i = %b, data1_i = %b, select_i = %b, data_o = %b", data0_i, data1_i, select_i, data_o);
-    data0_i = 2'b00;
-    data1_i = 2'b11;
-    select_i = 1;
-    #1 select_i = 0;
-  end
-  endmodule
+// module test();
+//   localparam  size = 2;
+//   reg  [size:0] data0_i;
+//   reg  [size:0] data1_i;
+//   reg             select_i;
+//   wire [size:0] data_o;
+//
+//   MUX_2_to_1 #(3) m21(data0_i, data1_i, select_i, data_o);
+//
+//   initial begin
+//     $monitor("data0_i = %b, data1_i = %b, select_i = %b, data_o = %b", data0_i, data1_i, select_i, data_o);
+//     data0_i = 2'b00;
+//     data1_i = 2'b11;
+//     select_i = 1;
+//     #1 select_i = 0;
+//   end
+//   endmodule
