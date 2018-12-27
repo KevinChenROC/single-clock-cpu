@@ -12,13 +12,18 @@ module Decoder( OP, Reg_WE, DM_WE, ALU_OP, ALU_src,MEM_to_REG,REG_Dst,funct);
 	 always @ ( * ) begin
 	 	case (OP)
 	 		6'b000000: begin
-				//R type
-				Reg_WE = 1;
-				REG_Dst = 1;
-				MEM_to_REG = 0;
-				DM_WE = 0;
-				ALU_src = 0;
-				ALU_OP = 2'b10;
+				if(funct == 6'b000000)begin
+					Reg_WE = 0;
+					DM_WE = 0;
+				end
+				else begin
+					Reg_WE = 1;
+					REG_Dst = 1;
+					MEM_to_REG = 0;
+					DM_WE = 0;
+					ALU_src = 0;
+					ALU_OP = 2'b10;
+				end
 			end
 	 	endcase
 	 end

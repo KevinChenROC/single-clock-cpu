@@ -45,7 +45,8 @@ initial begin
 		i_CPU.i_Reg.Register[i] = i+1;
 		i_CPU.i_DM.DataMemory[i] = i+1;
 	end
-		
+
+
 	#5
 	//start
 	#(`total_cycles * 10)
@@ -60,6 +61,9 @@ end
 always #5 CLK = ~CLK;
 
 always@(posedge CLK) begin
+	// for(i = 0; i < 8; i = i + 1)
+	// 	$display(i_CPU.i_Reg.Register[i]);
+	// $display("WE = %b, RS = %d RT = %d RData1 = %d Rdata2 = %d, Wdata = %d",i_CPU.Reg_WE,i_CPU.RS_ID, i_CPU.RT_ID, i_CPU.Reg_RData1, i_CPU.Reg_RData2, i_CPU.Reg_WData);
 	if(START == 0)
 		START <= 1;
 	else
@@ -69,26 +73,26 @@ end
 always@(posedge CLK) begin
 	if(START == 1 && count > 0) begin
 		#1
-		
-		
+
+
 		for(i = 0; i < 8; i = i + 1)begin
 			out_temp = ansREG[exp_num_reg+i];
 			if(i_CPU.i_Reg.Register[i]!==out_temp)begin
 				$display("ERROR at cycle %3d   reg %3d : value %4h !=expect %4h " , count, i , i_CPU.i_Reg.Register[i], out_temp);
 				err = 1;
 			end
-		end	
-		
-		
-		
+		end
+
+
+
 		for(i = 0; i < 8; i = i + 1)begin
 			out_temp = ansMEM[exp_num_reg+i];
 			if(i_CPU.i_DM.DataMemory[i]!==out_temp)begin
 				$display("ERROR at cycle %3d   MEM %3d : value %4h !=expect %4h " , count, i , i_CPU.i_DM.DataMemory[i], out_temp);
 				err = 1;
 			end
-		end	
-		
+		end
+
 		#1
 		exp_num_reg = exp_num_reg + 8;
 		exp_num_mem = exp_num_mem + 8;
@@ -106,8 +110,8 @@ always@(posedge fin) begin
 	$display("CPU for add, sub ,and slt");
 	if(err) begin
 		$display("================================================================================================================");
-		$display("--------------------------- (/`n`)/ ~#  There was something wrong with your code !! ----------------------------"); 
-		$display("--------------------------- The simulation has finished with some error, Please check it !!! -------------------"); 
+		$display("--------------------------- (/`n`)/ ~#  There was something wrong with your code !! ----------------------------");
+		$display("--------------------------- The simulation has finished with some error, Please check it !!! -------------------");
 		$display("================================================================================================================");
 	end
 	else begin

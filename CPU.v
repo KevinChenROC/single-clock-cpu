@@ -72,5 +72,4 @@ module CPU(CLK, START);
 	assign Reg_WData = Mux_Mem_to_reg_out;
 	assign address = extend_sign;
 
-
 endmodule

@@ -5,24 +5,18 @@ module Reg(CLK, RS_ID, RT_ID, REG_W_ID, Reg_WE, Reg_RData1, Reg_RData2, Reg_WDat
 	input [2:0] RS_ID, RT_ID , REG_W_ID;
 	input Reg_WE;
 	input [15:0] Reg_WData;
-	output reg [15:0] Reg_RData1;
-	output reg [15:0] Reg_RData2;
+	output [15:0] Reg_RData1;
+	output [15:0] Reg_RData2;
 
 	//8 * (16 bits regstiers)
 	reg signed [15:0] Register [0:7];
-	integer i;
 
-	//initialize regstiers
-	initial begin
-	end
-
+	assign Reg_RData1 = Register[RS_ID];
+	assign Reg_RData2 = Register[RT_ID];
 
 	always@(posedge CLK) begin
-		if( Reg_WE == 1 )
+		if( Reg_WE )
 			Register[REG_W_ID] <= Reg_WData;
-		else
-			Reg_RData1 <= Register[RS_ID];
-			Reg_RData2 <= Register[RT_ID];
 	end
 
 endmodule
